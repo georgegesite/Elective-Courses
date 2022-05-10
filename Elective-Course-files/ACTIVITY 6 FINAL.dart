@@ -3,7 +3,9 @@
 // author - GEORGE GESITE, BSCPE -3A
 import 'dart:io';
 
+//This library system is openn for the public, and is noo need for registration to access the system
 void main() {
+  //these are the books that are currently in the system
   var book1 = new Books("Cracking the Coding Interview", "Gayle Laakmann",
       "Computer Science", 9780984782802);
   var book2 =
@@ -70,16 +72,17 @@ void main() {
     print("F = Return a Book");
     print("EXIT = EXIT program\n");
 
-    String? letter = stdin.readLineSync();
+    String? letter = stdin
+        .readLineSync(); //user inputs a letter for a specific function desired
     letter = letter?.toUpperCase(); //accepts letter as uppercase or lowercase
     switch (letter) {
-      case "A": // print the number of books available in our system
+      case "A": // prints all the number of books available in our system(for lending)
         {
           print("--Number of books are: ");
           print(booksList.length);
         }
         break;
-      case "B": //show all books in our system
+      case "B": //show all books in our system that are NOT borrowed
         {
           for (int i = 0; i < booksList.length; i++) {
             print("${booksList[i].Title}");
@@ -87,6 +90,7 @@ void main() {
         }
         break;
       case "C": // show number of lent books
+        //also shows the books that are borrowed, and the user borrowing it
         {
           print("--No. of lent books are");
           print(lentbooksList.length);
@@ -99,6 +103,8 @@ void main() {
         }
         break;
       case "D": //add more books (one by one)
+        //asks for title of the book, then checks system if it is already registed
+        //if not, the system will ask additional info about the book, and is now a book available for lending in the system
         {
           int flag = 0;
           print("Enter TITLE of the new book");
@@ -128,6 +134,8 @@ void main() {
         }
         break;
       case "E": //lend books
+        //users will have to input the book title they want, and the system checks if the book is available for lending
+        // if available, the system will ask for the lender's name and address and is stored in a diffrent list where the book and user info are stored.
         {
           int flag = 0;
           print("--type book you wanna borrow: ");
@@ -173,6 +181,9 @@ void main() {
         }
         break;
       case "F": //return books
+        //to return the book, the user must correctly input the title of the book
+        //the system then checks if the book is listed as "borrowed by a user"
+        //the system then receives the book and displays it as available for lending
         {
           int x = 0;
           int flag = 0;
@@ -216,6 +227,9 @@ void main() {
   }
 }
 
+/*I created two classes, one for the pre-registered books, and one for those books that will be lended to the public */
+/*Once a user borrows a book, the masterlist name "booksList" will transfer that specific book to another list called "lentbooksList" 
+so that particular list will only entertian books that are borrowed, and will not interfere with the main list of the 15 original books added*/
 class Books {
   //class for the books
   String? Title;
@@ -238,6 +252,7 @@ class LentBooks {
       this.useraddress);
 
   void disp() {
+    //when user finishes filling out the details, the user will see his/her name, address and the book he borrowed.
     print("\n---User Info---");
     print(username);
     print(useraddress);
